@@ -1,6 +1,6 @@
 export default [
     {
-        titls: 'Go to store',
+        title: 'Go to store',
         details: 'Get eggs, milk, bread, and Diet Coke',
         _id: '001'
     },{
