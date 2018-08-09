@@ -7,7 +7,9 @@ class TodoList extends Component{
     }}
     render(){
         console.log(listData);
-        const listElements = listData.map((item, index) => {
+        // const listElements = listData.map((item, index) => {
+        const listElements = this.props.list.map((item, index) => {
+
             return <li className = 'collection-item' key = {item._id}>{item.title}</li>  
         });
         return (
