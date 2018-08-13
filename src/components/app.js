@@ -11,10 +11,8 @@ import {Route, Switch} from 'react-router-dom';
 import Home from './home';
 import NotFound from './404';
 
-import ItemDetails from './item_details'
-
-const BASE_URL = 'http://api.reactprototypes.com';
-const API_KEY = '?key=c518_demouser'
+import ItemDetails from './item_details';
+import config from '../config';
 
 class App extends Component {
     constructor(props){
@@ -30,9 +28,17 @@ class App extends Component {
         //     items: [item, ...this.state.items]
         // });
 
-        const resp = await axios.post(`${BASE_URL}/todos${API_KEY}`, item);
+        const {BASE_URL, API_KEY} = config.api;
+        try{
+        await axios.post(`${BASE_URL}/todos${API_KEY}`, item);
         this.getListData();
-        console.log('Server Resp:', resp);
+        } catch(err){
+            console.log('Something went wrong!:', err.message)
+        }
+
+        // const resp = await axios.post(`${BASE_URL}/todos${API_KEY}`, item);
+        // this.getListData();
+        // console.log('Server Resp:', resp);
 
     //    try{ 
     //     if(!item.title){
@@ -56,6 +62,9 @@ class App extends Component {
     }
 
     async getListData(){
+
+        const {BASE_URL, API_KEY} = config.api;
+
         //This is where you would call the server for your data
         //http://api.reactprototypes.com/todos?key=c418_demouser
        const resp = await axios.get(`${BASE_URL}/todos${API_KEY}`);
@@ -92,8 +101,8 @@ class App extends Component {
                 <Switch>
                 <Route exact path = "/" render = {(props)=>{
                     // return <Home add = {this.addItem.bind(this)} list = {this.state.items} {...props}/>}}/>
-                    return <Home getList = {this.getListData.bind(this)} list = {this.state.items} {...props}/>}}/>
-                <Route path = "/item-details" component={ItemDetails}/>
+                    return <Home getList = {this.getListData.bind(this)} add={this.addItem.bind(this)} list = {this.state.items} {...props}/>}}/>
+                <Route path = "/item-details/:item_id" component={ItemDetails}/>
                 <Route component = {NotFound}/>
                 </Switch>
             </div>
