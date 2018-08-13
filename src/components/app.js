@@ -7,8 +7,11 @@ import AddItem from './add_item';
 import React, {Component} from 'react';
 import listData from '../data/todo';
 import axios from 'axios';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import Home from './home';
+import NotFound from './404';
+
+import ItemDetails from './item_details'
 
 const BASE_URL = 'http://api.reactprototypes.com';
 const API_KEY = '?key=c518_demouser'
@@ -86,10 +89,13 @@ class App extends Component {
                 <TodoList list = {this.state.items}/> */}
                 {/* <Route exact path = "/" component = {Home add={this.addItem.bind(this)}/>} */}
                 {/* <Route exact path = "/" component = {Home} add={this.addItem.bind(this)}/> */}
+                <Switch>
                 <Route exact path = "/" render = {(props)=>{
                     // return <Home add = {this.addItem.bind(this)} list = {this.state.items} {...props}/>}}/>
                     return <Home getList = {this.getListData.bind(this)} list = {this.state.items} {...props}/>}}/>
-
+                <Route path = "/item-details" component={ItemDetails}/>
+                <Route component = {NotFound}/>
+                </Switch>
             </div>
         );
     }
