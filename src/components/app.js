@@ -57,6 +57,16 @@ class App extends Component {
 
     }
     
+async deleteItem(id){
+    const { BASE_URL, API_KEY} = config.api;
+    try{
+        const resp= await axios.delete(`${BASE_URL}/todos/${id + API_KEY}`)
+        console.log('Delete Resp:', resp);
+    }   catch(err){
+        console.log('Delete Error:', err.message);
+    }
+}
+
     componentDidMount(){
         this.getListData();
     }
@@ -102,7 +112,8 @@ class App extends Component {
                 <Route exact path = "/" render = {(props)=>{
                     // return <Home add = {this.addItem.bind(this)} list = {this.state.items} {...props}/>}}/>
                     return <Home getList = {this.getListData.bind(this)} add={this.addItem.bind(this)} list = {this.state.items} {...props}/>}}/>
-                <Route path = "/item-details/:item_id" component={ItemDetails}/>
+                <Route path = "/item-details/:item_id" render = {routeProps => {
+                return <ItemDetails delete = {this.deleteItem.bind(this)}{...routeProps}/>}}/>
                 <Route component = {NotFound}/>
                 </Switch>
             </div>
