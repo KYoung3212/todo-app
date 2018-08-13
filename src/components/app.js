@@ -7,9 +7,12 @@ import AddItem from './add_item';
 import React, {Component} from 'react';
 import listData from '../data/todo';
 import axios from 'axios';
+import {Route, Switch} from 'react-router-dom';
+import Home from './home';
+import NotFound from './404';
 
-const BASE_URL = 'http://api.reactprototypes.com';
-const API_KEY = '?key=c518_demouser'
+import ItemDetails from './item_details';
+import config from '../config';
 
 class App extends Component {
     constructor(props){
@@ -25,9 +28,17 @@ class App extends Component {
         //     items: [item, ...this.state.items]
         // });
 
-        const resp = await axios.post(`${BASE_URL}/todos${API_KEY}`, item);
+        const {BASE_URL, API_KEY} = config.api;
+        try{
+        await axios.post(`${BASE_URL}/todos${API_KEY}`, item);
         this.getListData();
-        console.log('Server Resp:', resp);
+        } catch(err){
+            console.log('Something went wrong!:', err.message)
+        }
+
+        // const resp = await axios.post(`${BASE_URL}/todos${API_KEY}`, item);
+        // this.getListData();
+        // console.log('Server Resp:', resp);
 
     //    try{ 
     //     if(!item.title){
@@ -51,6 +62,9 @@ class App extends Component {
     }
 
     async getListData(){
+
+        const {BASE_URL, API_KEY} = config.api;
+
         //This is where you would call the server for your data
         //http://api.reactprototypes.com/todos?key=c418_demouser
        const resp = await axios.get(`${BASE_URL}/todos${API_KEY}`);
@@ -74,14 +88,23 @@ class App extends Component {
         
     // }
     render(){
-        console.log('App State: ', this.state);
+        console.log('To Do List:', this.state.items);
         return (
             <div className = 'container'>
-                <h1 className = 'center'>
+                {/* <h1 className = 'center'>
                     To Do List 
-                </h1>
-                <AddItem add = {this.addItem.bind(this)}/>
-                <TodoList list = {this.state.items}/>
+                </h1> */}
+                {/* <AddItem add = {this.addItem.bind(this)}/>
+                <TodoList list = {this.state.items}/> */}
+                {/* <Route exact path = "/" component = {Home add={this.addItem.bind(this)}/>} */}
+                {/* <Route exact path = "/" component = {Home} add={this.addItem.bind(this)}/> */}
+                <Switch>
+                <Route exact path = "/" render = {(props)=>{
+                    // return <Home add = {this.addItem.bind(this)} list = {this.state.items} {...props}/>}}/>
+                    return <Home getList = {this.getListData.bind(this)} add={this.addItem.bind(this)} list = {this.state.items} {...props}/>}}/>
+                <Route path = "/item-details/:item_id" component={ItemDetails}/>
+                <Route component = {NotFound}/>
+                </Switch>
             </div>
         );
     }
