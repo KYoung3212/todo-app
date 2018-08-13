@@ -7,6 +7,8 @@ import AddItem from './add_item';
 import React, {Component} from 'react';
 import listData from '../data/todo';
 import axios from 'axios';
+import {Route} from 'react-router-dom';
+import Home from './home';
 
 const BASE_URL = 'http://api.reactprototypes.com';
 const API_KEY = '?key=c518_demouser'
@@ -74,14 +76,19 @@ class App extends Component {
         
     // }
     render(){
-        console.log('App State: ', this.state);
+        console.log('To Do List:', this.state.items);
         return (
             <div className = 'container'>
-                <h1 className = 'center'>
+                {/* <h1 className = 'center'>
                     To Do List 
-                </h1>
-                <AddItem add = {this.addItem.bind(this)}/>
-                <TodoList list = {this.state.items}/>
+                </h1> */}
+                {/* <AddItem add = {this.addItem.bind(this)}/>
+                <TodoList list = {this.state.items}/> */}
+                {/* <Route exact path = "/" component = {Home add={this.addItem.bind(this)}/>} */}
+                {/* <Route exact path = "/" component = {Home} add={this.addItem.bind(this)}/> */}
+                <Route exact path = "/" render = {(props)=>{
+                    return <Home add = {this.addItem.bind(this)} list = {this.state.items} {...props}/>}}/>
+
             </div>
         );
     }
