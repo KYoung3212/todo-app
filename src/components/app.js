@@ -87,7 +87,8 @@ class App extends Component {
                 {/* <Route exact path = "/" component = {Home add={this.addItem.bind(this)}/>} */}
                 {/* <Route exact path = "/" component = {Home} add={this.addItem.bind(this)}/> */}
                 <Route exact path = "/" render = {(props)=>{
-                    return <Home add = {this.addItem.bind(this)} list = {this.state.items} {...props}/>}}/>
+                    // return <Home add = {this.addItem.bind(this)} list = {this.state.items} {...props}/>}}/>
+                    return <Home getList = {this.getListData.bind(this)} list = {this.state.items} {...props}/>}}/>
 
             </div>
         );

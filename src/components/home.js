@@ -3,6 +3,9 @@ import AddItem from './add_item';
 import TodoList from './todo_list';
 
 class Home extends Component {
+    componentDidMount(){
+        this.props.getList();
+    }
     render(){
         console.log('PROPS:', this.props)
         const {add, list} = this.props;
