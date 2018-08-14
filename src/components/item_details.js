@@ -49,12 +49,20 @@ class ItemDetails extends Component {
                     <Link to="/" className = "btn purple darken-2">Back to List </Link>
                 </div>
                 </div>
-                <h4><em>Title:</em>{itemDetails.title}</h4>
+                <h4><em>Title: </em>{itemDetails.title}</h4>
                 <h5>
                     {
                         itemDetails.complete
-                        ? 'Item Complete'
-                        : 'Item is not yet complete'
+                        ? (<div>
+                            <div>Item Complete</div>
+                        <h4><em>Name of todo item: </em>{itemDetails.title}</h4>
+                        <h4><em>Item ID: </em>{itemDetails._id}</h4>
+                        <h4><em>Item Complete: </em>{itemDetails.completed}</h4>
+                        <h4><em>Name of userID: </em>{itemDetails.userId}</h4>
+
+                        </div>
+                    )
+                        : ('Item is not yet complete')
                     }
                 </h5>
                 <div className="row">
