@@ -13,6 +13,7 @@ class TodoList extends Component{
 
             // return <li className = 'collection-item' key = {item._id}>{item.title}</li>  
             return <TodoItem key = {item._id} id={item._id} title = {item.title}/>;
+            
         });
         return (
                 <ul className = "collection">{listElements}</ul>

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import config from '../config';
-import axios from 'axios'
+import axios from 'axios';
+// import DeleteToggle from './delete_toggle_buttons'
 
 class ItemDetails extends Component {
 
@@ -69,10 +70,11 @@ class ItemDetails extends Component {
                 <div className="col s6 center">
                     <button onClick = {this.handleToggleComplete.bind(this)} className = "btn blue darken-2">Toggle Complete</button>
                 </div>
-                <div className="col s6 cebter">
+                <div className="col s6 center">
                 <button onClick={this.handleDelete.bind(this)} className = "btn red darken-2">Delete</button>
                 </div>
                 </div>
+                {/* <DeleteToggle/> */}
             </div>
         )
     }
