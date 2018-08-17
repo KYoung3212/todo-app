@@ -8,7 +8,7 @@ class Home extends Component {
     }
     render(){
         console.log('PROPS:', this.props)
-        const {add, list} = this.props;
+        const {add, list, getList} = this.props;
         return(
             <div>
                 <h1 className ='center'>To Do List</h1>
@@ -16,7 +16,7 @@ class Home extends Component {
                 {/* <AddItem add = {this.addItem.bind(this)}/> */}
                 <AddItem add = {add}/>
 
-                <TodoList list = {list}/>
+                <TodoList delete = {this.props.delete} list = {list} getList = {getList}/>
             </div>
         )
     }

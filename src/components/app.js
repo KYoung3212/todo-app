@@ -123,7 +123,7 @@ async deleteItem(id){
                 <Switch>
                 <Route exact path = "/" render = {(props)=>{
                     // return <Home add = {this.addItem.bind(this)} list = {this.state.items} {...props}/>}}/>
-                    return <Home getList = {this.getListData.bind(this)} add={this.addItem.bind(this)} list = {this.state.items} {...props}/>}}/>
+                    return <Home delete = {this.deleteItem.bind(this)} getList = {this.getListData.bind(this)} add={this.addItem.bind(this)} list = {this.state.items} {...props}/>}}/>
                 <Route path = "/item-details/:item_id" render = {routeProps => {
                 return <ItemDetails toggleComplete={this.toggleItemComplete.bind(this)} delete = {this.deleteItem.bind(this)}{...routeProps}/>}}/>
                 <Route component = {NotFound}/>
